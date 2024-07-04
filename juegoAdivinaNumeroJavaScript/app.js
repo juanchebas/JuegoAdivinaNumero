@@ -1,5 +1,7 @@
 /////////////////////////////inicio codigo///////////////////////////////////////
 let numeroSecreto = Math.floor(Math.random() * 10) + 1;
+let numMaxPosible = 10;
+let numMinPosible = 1;
 let intentos = 1;
 const maxIntentos = 3;
 console.log(numeroSecreto);
@@ -19,7 +21,7 @@ function botonIntentar() {
         document.getElementById('iniciar').setAttribute("disabled", 'true');
     }  else  {
         limpiarCaja();
-        if (numeroUsuario > 10) {
+        if (numeroUsuario > maxIntentos) {
             textoElementos('p', `Número invalido!!! ❌ intentos restantes: ${maxIntentos - intentos}`);
         }  else if (numeroUsuario < 1) {
             textoElementos('p', `El número secreto es menor al rango solicitado, número de intentos restantes ${maxIntentos - intentos}`);
@@ -28,7 +30,7 @@ function botonIntentar() {
         }  else if (numeroUsuario < numeroSecreto){
             textoElementos('p', 'El número secreto es mayor');
         }  else {
-            textoElementos('p', 'Intento perdido, debe digitar un número entre 1 y 10');
+            textoElementos('p', `Intento perdido, debe digitar un número entre ${numMinPosible} y ${numMaxPosible}`);
         }
         intentos++;
     }
@@ -67,10 +69,11 @@ function botonNuevo() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function mensajesIniciales() {
     textoElementos('h1', 'JUEGO ADIVINAR NÚMERO');
-    textoElementos('p', 'Elige un número entre 1 y 10');
+    textoElementos('p', `Elige un número entre ${numMinPosible} y ${numMaxPosible}`);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////
+
 
