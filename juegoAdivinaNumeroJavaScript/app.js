@@ -1,79 +1,75 @@
-/////////////////////////////inicio codigo///////////////////////////////////////
-let numeroSecreto = Math.floor(Math.random() * 10) + 1;
-let numMaxPosible = 10;
-let numMinPosible = 1;
-let intentos = 1;
-let maxIntentos = 3;
+
+generarNumeroSecreto();
 console.log(numeroSecreto);
+let intentos = 1;
+let numMaxIntentos = 3;
+
 mensajesIniciales();
-document.getElementById('iniciar').removeAttribute('disabled');
-//////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+function mensajesIniciales() {
+    llamarElemento('h1', 'Adivina el número secreto');
+    llamarElemento('p', 'Elige un número entre 1 y 10');
+}
+////////////////////////////////////////////////////////////
 function botonIntentar() {
-    let numeroUsuario = parseInt(document.getElementById("valorInput").value);
+    let numeroUsuario = parseInt(document.getElementById('cajaNumero').value);
 
     if (numeroUsuario == numeroSecreto) {
-        textoElementos('h1', 'GANASTE!!!');
-        textoElementos('p', `Adivinaste el número en ${intentos} ${intentos == 1 ? 'intento' : 'intentos'}`);
-        document.getElementById('reiniciar').removeAttribute('disabled');
-        document.getElementById('iniciar').setAttribute("disabled", 'true');
-    }  else  {
+        llamarElemento('h1', 'Adivinaste el número !!!');
+        llamarElemento('p', `Ganaste en ${intentos} ${intentos == 1 ? "intento" : "intentos"}`);
+        onOffBotones();
+    }  else {
         limpiarCaja();
-        if (numeroUsuario > maxIntentos) {
-            textoElementos('p', `Número invalido!!! ❌ intentos restantes: ${maxIntentos - intentos}`);
-        }  else if (numeroUsuario < 1) {
-            textoElementos('p', `El número secreto es menor al rango solicitado, número de intentos restantes ${maxIntentos - intentos}`);
-        }  else if (numeroUsuario > numeroSecreto){
-            textoElementos('p', 'El número secreto es menor');
-        }  else if (numeroUsuario < numeroSecreto){
-            textoElementos('p', 'El número secreto es mayor');
-        }  else {
-            textoElementos('p', `Intento perdido, debe digitar un número entre ${numMinPosible} y ${numMaxPosible}`);
+        if (numeroUsuario > numeroSecreto) {
+            llamarElemento('p', 'El número secreto es menor');
+        } else if (numeroUsuario < numeroSecreto) {
+            llamarElemento('p', 'El número secreto es mayor');
         }
         intentos++;
+
+        if (intentos > numMaxIntentos) {
+            llamarElemento("h1", `Has perdido!!!`);
+            llamarElemento("p" ,`El número secreto era: ${numeroSecreto}`);
+            onOffBotones();
+        }   
     }
-
-    if (intentos > maxIntentos) {
-        textoElementos('h1', 'PERDISTE!!! JUEGA DE NUEVO');
-        textoElementos('p', `Perdiste:  Intentos realizados: ${maxIntentos}`);
-        document.getElementById('reiniciar').removeAttribute('disabled');
-        document.getElementById('iniciar').setAttribute("disabled", 'true');
-    }
-}
-//////////////////////////////////////////////////////////////////////////////////
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
-function textoElementos(elemento, texto) {
-    let element = document.querySelector(elemento);
-    element.innerHTML = texto;
     return;
 }
-//////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+function llamarElemento(elemento, texto){
+    let etiqueta = document.querySelector(elemento);
+    etiqueta.innerHTML = texto;
+    return;
+}  
+////////////////////////////////////////////////////////////
 function limpiarCaja() {
-    let vaciarCaja = document.getElementById("valorInput");
+    let vaciarCaja = document.getElementById("cajaNumero");
     vaciarCaja.value = "";
     return;
 }
-//////////////////////////////////////////////////////////////////////////////////////////
-function botonNuevo() {
-    limpiarCaja();
+//////////////////////////////////////////////////////////////
+function reiniciarJuego() {
     mensajesIniciales();
-    document.querySelector('#reiniciar').setAttribute("disabled", 'true');
+    limpiarCaja();
     intentos = 1;
-    document.getElementById('iniciar').removeAttribute('disabled');
+    generarNumeroSecreto();
+    console.log(numeroSecreto);
+    document.getElementById("intento").removeAttribute('disabled');
+    document.getElementById("reiniciar").setAttribute('disabled', 'true');
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function mensajesIniciales() {
-    textoElementos('h1', 'JUEGO ADIVINAR NÚMERO');
-    textoElementos('p', `Elige un número entre ${numMinPosible} y ${numMaxPosible}`);
+/////////////////////////////////////////////////////////////
+function generarNumeroSecreto() {
+    numeroSecreto =  Math.floor(Math.random() * 10) + 1;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function onOffBotones() {
+    document.getElementById("intento").setAttribute('disabled', 'true');
+    document.getElementById("reiniciar").removeAttribute('disabled');
+    return;
+}
 ///////////////////////////////////////////////////////////////////////////////////
 
 
