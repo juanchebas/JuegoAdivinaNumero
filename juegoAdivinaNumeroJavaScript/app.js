@@ -3,7 +3,7 @@ let numeroSecreto = Math.floor(Math.random() * 10) + 1;
 let numMaxPosible = 10;
 let numMinPosible = 1;
 let intentos = 1;
-const maxIntentos = 3;
+let maxIntentos = 3;
 console.log(numeroSecreto);
 mensajesIniciales();
 document.getElementById('iniciar').removeAttribute('disabled');
