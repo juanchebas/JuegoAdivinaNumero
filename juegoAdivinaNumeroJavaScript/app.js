@@ -1,4 +1,3 @@
-
 generarNumeroSecreto();
 console.log(numeroSecreto);
 let intentos = 1;
