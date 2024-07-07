@@ -23,7 +23,7 @@ main {
 #marco {
     display: flex;
     position: absolute;
-    border: 10px solid #135D66;
+    border: 10px solid yellow;
     border-radius: 100px;
     overflow: hidden;
     top: 9%;
